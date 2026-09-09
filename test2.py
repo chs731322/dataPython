@@ -1,5 +1,5 @@
 print("=========================")
-print("계산기")
+print("\t계산기")
 print("=========================")
 
 # 방법 1
@@ -13,15 +13,21 @@ if operator not in ["+", "-", "*", "/"]:
 b = int(input("두 번째 숫자를 입력하세요 : "))
 
 if operator == "+":
-    print(f"{a} + {b} = {a+b}")
+    print(f"답 : {a} + {b} = {a+b}")
 elif operator == "-":
-    print(f"{a} - {b} = {a-b}")
+    print(f"답 : {a} - {b} = {a-b}")
 elif operator == "*":
-    print(f"{a} * {b} = {a*b}")
+    print(f"답 : {a} * {b} = {a*b}")
 elif operator == "/":
-    print(f"{a} / {b} = {a/b}")
+    if b == 0:
+        print("0으로 나눌 수 없습니다. 프로그램을 종료합니다.")
+        exit()
+    else:
+        print(f"답 : {a} / {b} = {a/b}")
 
 # 방법 2
+"""
 print("=========================")
-s = input("방법 2 - 계산식을 입력하세요 : ")
+s = input("계산식을 입력하세요 : ")
 print(f"답 : {eval(s)}")
+"""
