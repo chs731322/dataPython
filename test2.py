@@ -2,12 +2,25 @@ print("=========================")
 print("계산기")
 print("=========================")
 
-name = input("이름을 입력하세요 : ")
-print(f"반갑습니다. {name}님!")
-
+# 방법 1
 a = int(input("첫 번째 숫자를 입력하세요 : "))
+
+operator = input("연산자를 입력하세요 (+, -, *, /) : ")
+if operator not in ["+", "-", "*", "/"]:
+    print("잘못된 연산자입니다. 프로그램을 종료합니다.")
+    exit()
+
 b = int(input("두 번째 숫자를 입력하세요 : "))
-print(f"{a} + {b} = {a+b}")
-print(f"{a} - {b} = {a-b}")
-print(f"{a} * {b} = {a*b}")
-print(f"{a} / {b} = {a/b}")
+
+if operator == "+":
+    print(f"{a} + {b} = {a+b}")
+elif operator == "-":
+    print(f"{a} - {b} = {a-b}")
+elif operator == "*":
+    print(f"{a} * {b} = {a*b}")
+elif operator == "/":
+    print(f"{a} / {b} = {a/b}")
+
+# 방법 2
+s = input("계산식을 입력하세요 : ")
+print(f"답 : {eval(s)}")
