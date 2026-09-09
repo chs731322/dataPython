@@ -22,5 +22,6 @@ elif operator == "/":
     print(f"{a} / {b} = {a/b}")
 
 # 방법 2
-s = input("계산식을 입력하세요 : ")
+print("=========================")
+s = input("방법 2 - 계산식을 입력하세요 : ")
 print(f"답 : {eval(s)}")
