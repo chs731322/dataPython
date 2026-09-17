@@ -15,11 +15,8 @@ while True :
         print("1~100사이의 숫자만 입력")
         continue
 
-    n += 1
-
     if a == answer:
         print("정답입니다")
-        print(f"{n}회 만에 성공")
         break
     elif a > answer:
         print("down")
