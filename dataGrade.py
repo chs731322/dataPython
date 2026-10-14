@@ -5,6 +5,7 @@ worksheet = workbook["학생 점수"]
 
 # 등급 열 추가
 worksheet.cell(row=1, column=3, value="등급")
+# worksheet["C1"] = "등급"
 
 for row in range(2, worksheet.max_row + 1):
     score = worksheet.cell(row=row, column=2).value
