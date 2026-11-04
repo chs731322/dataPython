@@ -22,15 +22,11 @@ sheet = workbook[SHEET_NAME]
 
 console = Console()
 
-
-
-def all_students():
-
+def make_table(title):
     table = Table(
-    title="학생 성적 관리 프로그램",
-    show_header=True, header_style="bold"
-)
-
+        title=title,
+        show_header=True, header_style="bold"
+    )
     table.add_column("학번", justify="center")
     table.add_column("이름", justify="center")
     table.add_column("학과", justify="left")
@@ -41,6 +37,11 @@ def all_students():
     table.add_column("평균", justify="right")
     table.add_column("등급", justify="center")
     table.add_column("상태", justify="center")
+    return table
+
+def all_students():
+
+    table = make_table("학생 성적 관리 프로그램")
 
     for row in range(2, sheet.max_row + 1):
         student_id = sheet.cell(row=row, column=1).value
@@ -76,20 +77,7 @@ def all_students():
     console.print(table)
 
 def good_students():
-    good_table = Table(
-        title="우수 학생 목록",
-        show_header=True, header_style="bold"
-    )
-    good_table.add_column("학번", justify="center")
-    good_table.add_column("이름", justify="center")
-    good_table.add_column("학과", justify="left")
-    good_table.add_column("국어", justify="right")
-    good_table.add_column("영어", justify="right")
-    good_table.add_column("수학", justify="right")
-    good_table.add_column("총점", justify="right")
-    good_table.add_column("평균", justify="right")
-    good_table.add_column("등급", justify="center")
-    good_table.add_column("상태", justify="center")
+    good_table = make_table("우수 학생 목록")
 
     for row in range(2, sheet.max_row + 1):
         average = sheet.cell(row=row, column=8).value
@@ -116,20 +104,7 @@ def good_students():
     console.print(good_table)
 
 def caution_students():
-    caution_table = Table(
-        title="주의 학생 목록",
-        show_header=True, header_style="bold"
-    )
-    caution_table.add_column("학번", justify="center")
-    caution_table.add_column("이름", justify="center")
-    caution_table.add_column("학과", justify="left")
-    caution_table.add_column("국어", justify="right")
-    caution_table.add_column("영어", justify="right")
-    caution_table.add_column("수학", justify="right")
-    caution_table.add_column("총점", justify="right")
-    caution_table.add_column("평균", justify="right")
-    caution_table.add_column("등급", justify="center")
-    caution_table.add_column("상태", justify="center")
+    caution_table = make_table("주의 학생 목록")
 
     for row in range(2, sheet.max_row + 1):
         average = sheet.cell(row=row, column=8).value
@@ -155,23 +130,26 @@ def caution_students():
 
     console.print(caution_table)
 
-menu = input("1. 전체 학생 조회\n2. 우수학생 조회\n3. 주의학생 조회\n4. 종료\n메뉴를 선택하세요: ")
+while True:
+    
+    menu = input("1. 전체 학생 조회\n2. 우수학생 조회\n3. 주의학생 조회\n4. 종료\n메뉴를 선택하세요: ").strip()
 
-try:
-    menu = int(menu)
-except ValueError:
-    print("잘못된 입력입니다.")
-    exit()
+    try:
+        menu = int(menu)
+    except ValueError:
+        print("잘못된 입력입니다.")
+        exit()
 
-if menu == 1:
-    all_students()
-elif menu == 2:
-    good_students()
-elif menu == 3:
-    caution_students()
-elif menu == 4:
-    print("프로그램을 종료합니다.")
-else:
-    print("잘못된 입력입니다.")
+    if menu == 1:
+        all_students()
+    elif menu == 2:
+        good_students()
+    elif menu == 3:
+        caution_students()
+    elif menu == 4:
+        print("프로그램을 종료합니다.")
+        break
+    else:
+        print("잘못된 입력입니다.")
 
-workbook.close()
+    workbook.close()
