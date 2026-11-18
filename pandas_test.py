@@ -59,6 +59,8 @@ df["합격여부"] = "합격"
 
 print(df.head())
 
+result = df[(df["평균"] >= 80) & (df["학과"] == "멀티미디어학과")]
+
 print("[전체 학생 데이터]")
 print(df.head())
 
@@ -86,6 +88,7 @@ df["상태"] = df["평균"].apply(get_status)
 
 print(df[["이름", "평균", "상태"]])
 '''
+'''
 def make_status(average):
     if average >= 90:
         return "우수"
@@ -104,3 +107,14 @@ result.to_excel(
     "pandas_result.xlsx",
     index=False
 )
+'''
+def check_result(average):
+    if average >= 70:
+        return "합격"
+    else:
+        return "불합격"
+
+df["합격여부"] = df["평균"].apply(check_result)
+
+print("\n[합격여부 추가 결과]")
+print(df[["이름", "학과", "평균", "등급", "합격여부"]])
