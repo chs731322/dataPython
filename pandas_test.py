@@ -1,9 +1,106 @@
 import pandas as pd
-
+'''
 df = pd.read_excel(
     "faker_students.xlsx",
     sheet_name="학생 성적"
 )
+
+print("[전체 학생 데이터]")
+print(df.head())
+
+def check_result(average):
+    if average >= 70:
+        return "합격"
+    else:
+        return "재검토"
+
+df["합격여부"] = df["평균"].apply(check_result)
+
+def make_status(average):
+    if average >= 90:
+        return "우수"
+    elif average >= 70:
+        return "일반"
+    else:
+        return "주의"
+    
+df["상태"] = df["평균"].apply(make_status)
+
+result = df[["이름", "평균"]]
+
+print("[전체 학생의 이름과 평균]")
+print(result)
+
+result.to_excel(
+    "pandas_result.xlsx",
+    index=False
+)
+
+# 문제풀이 1
+# 평균 80점 이상 학생 찾기
+high = df[df["평균"] >= 80]
+
+print("[평균이 80점 이상인 학생]")
+print(high)
+
+high.to_excel(
+    "high_results.xlsx",
+    index=False
+)
+
+# 문제풀이 2
+# 수학 우수 학생 찾기
+math_best = df[df["수학"] >= 90]
+
+print("[수학 점수가 90점 이상인 학생]")
+print(math_best)
+
+math_best.to_excel(
+    "math_best.xlsx",
+    index=False
+)
+
+# 문제풀이 3
+# 평균 점수 순위 만들기
+sort = df.sort_values(by="평균", ascending=False).head(5)
+
+print("[상위 5명 학생]")
+print(sort)
+
+sort.to_excel(
+    "top5_students.xlsx",
+    index=False
+)
+'''
+# 문제풀이 4
+df = pd.read_excel(
+    "faker_students.xlsx",
+    sheet_name="학생 성적"
+)
+
+print("[전체 학생의 평균 점수 출력]")
+print(df["평균"])
+
+best = df[df["평균"] >= 90]
+bad = df[df["평균"] < 70]
+
+sorted_df = df.sort_values(by="평균", ascending=False)
+print("[평균 높은 순 정렬]")
+print(sorted_df)
+
+def get_status(avg):
+    if avg >= 90:
+        return "우수"
+    elif avg < 70:
+        return "주의"
+    else:
+        return "일반"
+
+df["상태"] = df["평균"].apply(get_status)
+print("[상태 열 추가]")
+print(df)
+
+
 '''
 print(df.head())
 print(df.tail(3))
@@ -108,13 +205,3 @@ result.to_excel(
     index=False
 )
 '''
-def check_result(average):
-    if average >= 70:
-        return "합격"
-    else:
-        return "불합격"
-
-df["합격여부"] = df["평균"].apply(check_result)
-
-print("\n[합격여부 추가 결과]")
-print(df[["이름", "학과", "평균", "등급", "합격여부"]])
